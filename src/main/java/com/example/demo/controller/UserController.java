@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.config.ConfigBean;
+import com.example.demo.config.UserConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@EnableConfigurationProperties({ConfigBean.class})
+@EnableConfigurationProperties({ConfigBean.class, UserConfig.class})
 @RestController
 public class UserController {
 
@@ -23,6 +24,10 @@ public class UserController {
     @SuppressWarnings("all")
     ConfigBean configBean;
 
+    @Autowired
+    @SuppressWarnings("all")
+    UserConfig userConfig;
+
     @RequestMapping("/")
     public String index() {
         return "Greetings from Spring Boot!";
@@ -36,5 +41,10 @@ public class UserController {
     @GetMapping(value = "/getUserConfig")
     public String getUserWithConfig() {
         return configBean.getNumber() + " | " + configBean.getMax() + " | " + configBean.getGreeting();
+    }
+
+    @GetMapping(value = "/getUserPro")
+    public String getUserWithPro() {
+        return userConfig.getName() + " | " + userConfig.getAge();
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -33,6 +34,12 @@ public class DemoApplicationTest {
         System.out.println(this.base);
     }
 
+    private void getResponse(String path, Object... params) {
+        ResponseEntity<String> response = template.getForEntity(base.toString() + path,
+                String.class, params);
+        System.out.println(response.getBody());
+    }
+
     @Test
     public void getHello() {
         ResponseEntity<String> response = template.getForEntity(base.toString(),
@@ -49,12 +56,11 @@ public class DemoApplicationTest {
 
     @Test
     public void getUserWithConfig() {
-        ResponseEntity<String> response = template.getForEntity(base.toString() +"/getUserConfig",
-                String.class);
-        System.out.println(response.getBody());
+        getResponse("/getUserConfig");
     }
 
     @Test
-    public void contextLoads() {
+    public void getUserWithPro() {
+        getResponse("/getUserPro");
     }
 }
