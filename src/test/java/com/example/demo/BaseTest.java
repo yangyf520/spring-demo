@@ -1,13 +1,11 @@
 package com.example.demo;
 
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -18,7 +16,7 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class DemoApplicationTest {
+public class BaseTest {
 
     @LocalServerPort
     private int port;
@@ -34,33 +32,15 @@ public class DemoApplicationTest {
         System.out.println(this.base);
     }
 
-    private void getResponse(String path, Object... params) {
+    public void getResponse(String path, Object... params) {
         ResponseEntity<String> response = template.getForEntity(base.toString() + path,
                 String.class, params);
         System.out.println(response.getBody());
     }
 
-    @Test
-    public void getHello() {
-        ResponseEntity<String> response = template.getForEntity(base.toString(),
+    public void assertResult(String path, String massge) {
+        ResponseEntity<String> response = template.getForEntity(base.toString() + path,
                 String.class);
-        assertThat(response.getBody(), equalTo("Greetings from Spring Boot!"));
-    }
-
-    @Test
-    public void getUserWithValue() {
-        ResponseEntity<String> response = template.getForEntity(base.toString() +"/getUserValue",
-                String.class);
-        assertThat(response.getBody(), equalTo("yangyf:28"));
-    }
-
-    @Test
-    public void getUserWithConfig() {
-        getResponse("/getUserConfig");
-    }
-
-    @Test
-    public void getUserWithPro() {
-        getResponse("/getUserPro");
+        assertThat(response.getBody(), equalTo(massge));
     }
 }

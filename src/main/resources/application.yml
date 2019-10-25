@@ -1,7 +1,18 @@
+servlet:
+  context-path: /demo
+  port: 8888
+
 spring:
   profiles:
     active: dev
 
-servlet:
-  context-path: /demo
-  port: 8888
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+    username: root
+    password: pheonix
+
+  jpa:
+    hibernate:
+      ddl-auto: update  # 第一次建表create  后面用update
+    show-sql: true
