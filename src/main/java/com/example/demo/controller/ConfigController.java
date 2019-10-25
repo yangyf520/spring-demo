@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @EnableConfigurationProperties({ConfigBean.class, UserConfig.class})
 @RestController
-public class UserController {
+public class ConfigController {
 
     @SuppressWarnings(value = {"unchecked", "rawtypes"})
     @Value("${my.name}")
