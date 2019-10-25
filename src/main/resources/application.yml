@@ -1,0 +1,12 @@
+server:
+  contextPath:/demo
+  port:8888
+
+my:
+  name: yangyf
+  age: 28
+  number:  ${random.int}
+  uuid : ${random.uuid}
+  max: ${random.int(10)}
+  value: ${random.value}
+  greeting: hi,i'm  ${my.name}
