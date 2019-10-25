@@ -38,6 +38,12 @@ public class BaseTest {
         System.out.println(response.getBody());
     }
 
+    public void postResponse(String path, Object request, Object... params) {
+        ResponseEntity<String> response = template.postForEntity(base.toString() + path,
+                request, String.class, params);
+        System.out.println(response.getBody());
+    }
+
     public void assertResult(String path, String massge) {
         ResponseEntity<String> response = template.getForEntity(base.toString() + path,
                 String.class);

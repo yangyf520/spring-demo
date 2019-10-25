@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
-@RestController(value = "/user")
+@RestController
+@RequestMapping(value = "user")
 public class AccountController {
 
     @Autowired
@@ -20,11 +22,11 @@ public class AccountController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Account getAccountById(@PathVariable("id") int id) {
-//        return accountDao.findOne(id);
-        return null;
+        Optional<Account> account = accountDao.findById(id);
+        return account.get();
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
     public String updateAccount(@PathVariable("id") int id, @RequestParam(value = "name", required = true) String name,
                                 @RequestParam(value = "money", required = true) double money) {
         Account account = new Account();
@@ -37,7 +39,7 @@ public class AccountController {
 
     }
 
-    @RequestMapping(value = "", method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String postAccount(@RequestParam(value = "name") String name,
                               @RequestParam(value = "money") double money) {
         Account account = new Account();
