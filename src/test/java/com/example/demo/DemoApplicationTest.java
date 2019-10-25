@@ -38,15 +38,20 @@ public class DemoApplicationTest {
         ResponseEntity<String> response = template.getForEntity(base.toString(),
                 String.class);
         assertThat(response.getBody(), equalTo("Greetings from Spring Boot!"));
-
     }
 
     @Test
-    public void getUser() {
-        ResponseEntity<String> response = template.getForEntity(base.toString() +"/getUser",
+    public void getUserWithValue() {
+        ResponseEntity<String> response = template.getForEntity(base.toString() +"/getUserValue",
                 String.class);
         assertThat(response.getBody(), equalTo("yangyf:28"));
+    }
 
+    @Test
+    public void getUserWithConfig() {
+        ResponseEntity<String> response = template.getForEntity(base.toString() +"/getUserConfig",
+                String.class);
+        System.out.println(response.getBody());
     }
 
     @Test
