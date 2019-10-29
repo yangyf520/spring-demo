@@ -16,3 +16,7 @@ spring:
     hibernate:
       ddl-auto: update  # 第一次建表create  后面用update
     show-sql: true
+
+mybatis:
+  mapper-locations: classpath*:mybatis/*Mapper.xml
+  type-aliases-package: com.example.demo.entity

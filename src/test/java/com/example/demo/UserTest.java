@@ -23,4 +23,9 @@ public class UserTest extends BaseHttpTest {
         params.put("id", "1");//传值，但要在url上配置相应的参数
         get("/user/1", params);
     }
+
+    @Test
+    public void transfer() {
+        post("/user/transfer", null);
+    }
 }
