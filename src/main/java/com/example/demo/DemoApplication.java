@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import java.util.Arrays;
 
 @SpringBootApplication
-@MapperScan("com.example.demo")
+@MapperScan("com.example.demo.*.mapper") //事物不填该注解
 public class DemoApplication {
 
     public static void main(String[] args) {
