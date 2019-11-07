@@ -1,8 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.dao.AccountDao;
+import com.example.demo.dao.AccountJpaRepository;
 import com.example.demo.entity.Account;
-import com.example.demo.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,13 +10,10 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/user")
-public class AccountController {
+public class AccountJpaController {
 
     @Autowired
-    AccountDao accountDao;
-
-    @Autowired
-    AccountService accountService;
+    AccountJpaRepository accountDao;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public List<Account> getAccounts() {
@@ -52,10 +48,5 @@ public class AccountController {
         Account account1 = accountDao.save(account);
         return account1.toString();
 
-    }
-
-    @RequestMapping(value = "/transfer", method = RequestMethod.POST)
-    public void transfer() {
-        accountService.transfer();
     }
 }
