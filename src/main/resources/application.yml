@@ -1,26 +1,37 @@
+# tomcat启动配置
 servlet:
   context-path: /demo
   port: 8888
 
+# profiles配置
 spring:
   profiles:
     active: dev
 
+  # 数据库配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&autoReconnect=true&failOverReadOnly=false
     username: root
     password: pheonix
 
+  # Bean生成Table
   jpa:
     hibernate:
-      ddl-auto: update  # 第一次建表create  后面用update
+      ddl-auto: update  # 第一次建表create，后面用update
     show-sql: true
 
+  # Mongo配置
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/test
+
+# Mybatis的xml管理
 mybatis:
   mapper-locations: classpath*:mybatis/*Mapper.xml
   type-aliases-package: com.example.demo.entity
 
+# Mybatis显示sql
 logging:
   level:
     com:

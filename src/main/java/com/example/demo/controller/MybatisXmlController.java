@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/account")
-public class AccountXmlController {
+public class MybatisXmlController {
 
     @Autowired
     AccountService accountService;
