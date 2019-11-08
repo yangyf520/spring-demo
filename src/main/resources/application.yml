@@ -26,6 +26,18 @@ spring:
     mongodb:
       uri: mongodb://localhost:27017/test
 
+  redis:
+    host: localhost
+    port: 6379
+    #password:
+    database: 1
+    #timeout: 0
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 500
+      min-idle: 0
+
 # Mybatis的xml管理
 mybatis:
   mapper-locations: classpath*:mybatis/*Mapper.xml
