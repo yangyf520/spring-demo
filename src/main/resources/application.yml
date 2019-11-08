@@ -31,10 +31,16 @@ mybatis:
   mapper-locations: classpath*:mybatis/*Mapper.xml
   type-aliases-package: com.example.demo.entity
 
-# Mybatis显示sql
+# 输出日志
 logging:
   level:
-    com:
+    com: # Mybatis显示sql
       example:
         demo:
           mapper: debug
+
+    org: #Mongo显示日志
+      springframework:
+        data:
+          mongodb:
+            core: DEBUG

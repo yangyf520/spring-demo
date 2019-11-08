@@ -22,6 +22,8 @@ public class MongoController {
         // save a couple of customers
         customerMongoDao.save(new Customer("Alice", "Smith"));
         customerMongoDao.save(new Customer("Bob", "Smith"));
+
+        customerMongoDao.findByFirstName("Bob");
     }
 
 }
