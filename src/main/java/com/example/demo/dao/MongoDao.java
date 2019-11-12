@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface CustomerMongoDao extends MongoRepository<Customer, String> {
+public interface MongoDao extends MongoRepository<Customer, String> {
 
     Customer findByFirstName(String firstName);
 

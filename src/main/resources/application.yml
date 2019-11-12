@@ -46,13 +46,16 @@ mybatis:
 # 输出日志
 logging:
   level:
+    root: warn
     com: # Mybatis显示sql
       example:
         demo:
           mapper: debug
 
-    org: #Mongo显示日志
+    org:
       springframework:
+        web: debug
         data:
+          #Mongo显示日志
           mongodb:
-            core: DEBUG
+            core: debug

@@ -2,25 +2,25 @@ package com.example.demo;
 
 import org.junit.Test;
 
-public class ConfigTest extends BaseTest {
+public class ConfigTest extends BaseHttpTest {
 
     @Test
     public void getHello() {
-        assertResult("/", "Greetings from Spring Boot!");
+        get("/", "Greetings from Spring Boot!");
     }
 
     @Test
     public void getUserWithValue() {
-        assertResult("/getUserValue", "yangyf:28");
+        get("/getUserValue", "yangyf:28");
     }
 
     @Test
     public void getUserWithConfig() {
-        getResponse("/getUserConfig");
+        get("/getUserConfig");
     }
 
     @Test
     public void getUserWithPro() {
-        getResponse("/getUserPro");
+        get("/getUserPro");
     }
 }

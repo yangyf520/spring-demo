@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.dao.CustomerMongoDao;
+import com.example.demo.dao.MongoDao;
 import com.example.demo.entity.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MongoController {
 
     @Autowired
-    private CustomerMongoDao mongoDao;
+    private MongoDao mongoDao;
 
     @PostMapping(value = "add")
     public void addUser() {
