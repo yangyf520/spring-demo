@@ -15,12 +15,11 @@ import java.util.*;
  * 用户删除对某本图书	DELETE	/books/:id/
  * 用户获取所有的图书 GET /books
  * 用户获取某一图书  GET /Books/:id
- * Created by fangzhipeng on 2017/4/17.
  * 官方文档：http://swagger.io/docs/specification/api-host-and-base-path/
  */
 @RestController
 @RequestMapping(value = "/books")
-public class BookContrller {
+public class SwaggerController {
 
     Map<Long, Book> books = Collections.synchronizedMap(new HashMap<Long, Book>());
 
