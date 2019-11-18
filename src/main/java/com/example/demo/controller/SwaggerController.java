@@ -1,9 +1,11 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Book;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -17,14 +19,15 @@ import java.util.*;
  * 用户获取某一图书  GET /Books/:id
  * 官方文档：http://swagger.io/docs/specification/api-host-and-base-path/
  */
+@Api(value = "BookAction", description = "图书管理接口")
 @RestController
 @RequestMapping(value = "/books")
 public class SwaggerController {
 
     Map<Long, Book> books = Collections.synchronizedMap(new HashMap<Long, Book>());
 
-    @ApiOperation(value = "获取图书列表", notes = "获取图书列表")
-    @RequestMapping(value = {""}, method = RequestMethod.GET)
+    @ApiOperation(value = "获取图书列表", notes = "获取图书列表", tags = "查询接口")
+    @RequestMapping(value = {""}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Book> getBook() {
         List<Book> book = new ArrayList<>(books.values());
         return book;
@@ -39,7 +42,7 @@ public class SwaggerController {
     }
 
     @ApiOperation(value = "获图书细信息", notes = "根据url的id来获取详细信息")
-    @ApiImplicitParam(name = "id", value = "ID", required = true, dataType = "Long", paramType = "path")
+    @ApiImplicitParam(name = "id", value = "图书ID", required = true, dataType = "Long", paramType = "path")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Book getBook(@PathVariable Long id) {
         return books.get(id);
