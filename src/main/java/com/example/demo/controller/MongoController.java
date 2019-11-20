@@ -20,7 +20,7 @@ public class MongoController {
 
         mongoDao.deleteAll();
 
-        // save a couple of customers
+        // update a couple of customers
         mongoDao.save(new Customer("Alice", "Smith"));
         mongoDao.save(new Customer("Bob", "Smith"));
     }

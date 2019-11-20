@@ -41,8 +41,8 @@ public class BaseHttpTest {
         URL base = new URL("http://localhost:" + port);
         basePath = base.toString();
         SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
-        requestFactory.setConnectTimeout(1000);
-        requestFactory.setReadTimeout(1000);
+        requestFactory.setConnectTimeout(10000);
+        requestFactory.setReadTimeout(10000);
 
         restTemplate = new RestTemplate(requestFactory);
     }

@@ -10,6 +10,11 @@ import java.util.Map;
 public class UserTest extends BaseHttpTest {
 
     @Test
+    public void getUsers() {
+        get("/user/list");
+    }
+
+    @Test
     public void addUser() {
         MultiValueMap account = new LinkedMultiValueMap();
         account.add("name", "lake");
