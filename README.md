@@ -11,8 +11,8 @@
 ##### java -jar   xxxx.jar
 
 ##注意事项
-#### 需要把建表的Engine设置为InnoDB格式，
-#### 自动建表的格式为MyISAM不支持事务管理。
+* 需要把建表的Engine设置为InnoDB格式
+* 自动建表的格式为MyISAM不支持事务管理。
 
 ### swagger打开地址
 #### http://localhost:8080/swagger-ui.html
