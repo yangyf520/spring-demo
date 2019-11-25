@@ -7,14 +7,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.Arrays;
 
 @SpringBootApplication
-@EnableCaching
-@EnableTransactionManagement
-@MapperScan("com.example.*.mapper") //事物不填该注解
+@EnableCaching // 缓存
+@EnableScheduling
+@EnableTransactionManagement // 事物
+@MapperScan("com.example.*.mapper") // Mapper
 public class DemoApplication {
 
     public static void main(String[] args) {
