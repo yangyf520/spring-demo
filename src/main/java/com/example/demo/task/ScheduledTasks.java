@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 @Component
 public class ScheduledTasks {
@@ -20,8 +21,17 @@ public class ScheduledTasks {
         try {
             long millis = 1000 * Math.round(Math.random() * 10);
             System.out.println(String.format("%2$s睡%1$d秒", millis / 1000, "fixedDelay"));
-            Thread.sleep(millis);
-        } catch (InterruptedException e) {
+//            Thread.currentThread().sleep(millis);
+
+//            TimeUnit.DAYS.sleep(1);//天
+//            TimeUnit.HOURS.sleep(1);//小时
+//            TimeUnit.MINUTES.sleep(1);//分
+//            TimeUnit.SECONDS.sleep(1);//秒
+//            TimeUnit.MILLISECONDS.sleep(1000);//毫秒
+//            TimeUnit.MICROSECONDS.sleep(1000);//微妙
+//            TimeUnit.NANOSECONDS.sleep(1000);//纳秒
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

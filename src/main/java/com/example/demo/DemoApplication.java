@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.util.SpringContextUtil;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,7 +21,8 @@ import java.util.Arrays;
 public class DemoApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
+        ApplicationContext context = SpringApplication.run(DemoApplication.class, args);
+        SpringContextUtil.setApplicationContext(context);
     }
 
     @Bean
