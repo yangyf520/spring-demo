@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-@Component
+//@Component
 public class ScheduledTasks {
 
     // 定时
