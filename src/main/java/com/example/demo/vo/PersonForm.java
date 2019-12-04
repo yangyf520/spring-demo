@@ -1,6 +1,6 @@
 package com.example.demo.vo;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import com.example.demo.valid.DateValidator;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
@@ -22,8 +22,8 @@ public class PersonForm {
     @Pattern(regexp = "[A-Z][a-z][0-9]")
     private String passWord;
 
-    @DateTimeFormat(pattern = "yyy-MM-dd")
-    private Date createTime;
+    @DateValidator(dateFormat = "yyy-MM-dd")
+    private String createTime;
 
     public String getName() {
         return this.name;
@@ -49,11 +49,11 @@ public class PersonForm {
         this.passWord = passWord;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 

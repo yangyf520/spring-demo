@@ -7,6 +7,8 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,7 +50,7 @@ public class UserTest extends BaseHttpTest {
 
     @Test
     public void transfer() {
-       //post("/account/transfer", null);
+        //post("/account/transfer", null);
     }
 
     @Test
@@ -57,8 +59,9 @@ public class UserTest extends BaseHttpTest {
         account.setName("kalakala");
         account.setAge(88);
         account.setPassWord("密码");
+        account.setCreateTime("0000/08-09");
         ValidationUtil.ValidResult validResult = ValidationUtil.validateBean(account);
-        if(validResult.hasErrors()){
+        if (validResult.hasErrors()) {
             String errors = validResult.getErrors();
             System.out.println(errors);
         }
