@@ -17,4 +17,8 @@ public class AccountService {
         int i = 1 / 0;
         accountMapper.update(110, 2);
     }
+
+    public int sqlConnect() {
+        return accountMapper.sqlConnect();
+    }
 }

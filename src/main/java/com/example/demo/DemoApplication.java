@@ -8,17 +8,22 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.AsyncConfigurerSupport;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.Arrays;
+import java.util.concurrent.Executor;
 
 @SpringBootApplication
 @EnableCaching // 缓存
-@EnableScheduling
+@EnableScheduling // Scheduled
 @EnableTransactionManagement // 事物
 @MapperScan("com.example.*.mapper") // Mapper
-public class DemoApplication {
+@EnableAsync // Async异步方法
+public class DemoApplication extends AsyncConfigurerSupport {
 
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(DemoApplication.class, args);
@@ -37,6 +42,22 @@ public class DemoApplication {
             }
 
         };
+    }
+
+    /**
+     * 异步方法任务
+     * 重写AsyncConfigurerSupport的方法
+     * @return
+     */
+    @Override
+    public Executor getAsyncExecutor() {
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setCorePoolSize(2);
+        executor.setMaxPoolSize(2);
+        executor.setQueueCapacity(500);
+        executor.setThreadNamePrefix("GithubLookup-");
+        executor.initialize();
+        return executor;
     }
 
 }

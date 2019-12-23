@@ -68,8 +68,7 @@ logging:
     root: warn
     com: # Mybatis显示sql
       example:
-        demo:
-          mapper: debug
+        demo: debug
 
     org:
       springframework:
