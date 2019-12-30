@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.concurrent.Future;
 
-@Component
+//@Component
 public class AsyncRunner implements CommandLineRunner {
 
     private static final Logger logger = LoggerFactory.getLogger(AsyncRunner.class);
