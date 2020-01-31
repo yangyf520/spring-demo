@@ -30,8 +30,8 @@ public class UserTest extends BaseHttpTest {
     @Test
     public void getUser() {
         Map<String, String> params = new HashMap<>();
-        params.put("id", "1");//传值，但要在url上配置相应的参数
-        get("/user/1", params);
+        params.put("id", "2");//传值，但要在url上配置相应的参数
+        get("/user/1/Peach", params);
     }
 
     @Test

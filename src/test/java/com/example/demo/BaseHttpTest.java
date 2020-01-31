@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.util.JsonUtil;
 import net.minidev.json.JSONObject;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -51,6 +52,7 @@ public class BaseHttpTest {
      * GET请求
      */
     public String get(String uri, Object... params) {
+        System.out.println("参数：" + JsonUtil.bean2Json(params));
         String result = restTemplate.getForObject(basePath + uri, String.class, params);
         System.out.println(result);
         return result;
@@ -64,6 +66,7 @@ public class BaseHttpTest {
      * @return
      */
     public String post(String uri, MultiValueMap params) {
+        System.out.println("参数：" + JsonUtil.bean2Json(params));
         String result = restTemplate.postForObject(basePath + uri, params, String.class);
         System.out.println(result);
         return result;

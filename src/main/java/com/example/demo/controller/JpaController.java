@@ -21,8 +21,9 @@ public class JpaController {
         return jpaService.findAll();
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Account getAccountById(@PathVariable("id") int id) {
+    @RequestMapping(value = "/{id}/{nm}", method = RequestMethod.GET)
+    public Account getAccountById(@PathVariable("id") int id, @PathVariable("nm") String name) {
+        System.out.println("User :" + id + "," + name);
         return jpaService.findById(id);
     }
 

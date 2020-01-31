@@ -5,9 +5,7 @@ import com.example.demo.config.UserConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @EnableConfigurationProperties({ConfigBean.class, UserConfig.class})
 @RestController
@@ -28,9 +26,10 @@ public class ConfigController {
     @SuppressWarnings("all")
     UserConfig userConfig;
 
-    @RequestMapping("/")
-    public String index() {
-        return "Greetings from Spring Boot!";
+    @RequestMapping("/{msg}")
+    public String index(@PathVariable("msg") String message) {
+        System.out.println(message);
+        return message;
     }
 
     @GetMapping(value = "/getUserValue")
