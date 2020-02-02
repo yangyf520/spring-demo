@@ -10,7 +10,7 @@ public class ConfigTest extends BaseHttpTest {
 
     @Test
     public void getHello() {
-        get("/Hello, SpringBoot !");
+        get("/Hello,SpringBoot!");
     }
 
     @Test

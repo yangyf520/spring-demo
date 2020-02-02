@@ -4,6 +4,8 @@ import com.example.demo.util.JsonUtil;
 import net.minidev.json.JSONObject;
 import org.junit.Before;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.core.io.FileSystemResource;
@@ -26,6 +28,8 @@ import java.net.URL;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class BaseHttpTest {
+
+    Logger LOG = LoggerFactory.getLogger(BaseHttpTest.class);
 
     private String basePath;
 
@@ -52,9 +56,9 @@ public class BaseHttpTest {
      * GET请求
      */
     public String get(String uri, Object... params) {
-        System.out.println("参数：" + JsonUtil.bean2Json(params));
+        LOG.debug("参数：" + JsonUtil.bean2Json(params));
         String result = restTemplate.getForObject(basePath + uri, String.class, params);
-        System.out.println(result);
+        LOG.info(result);
         return result;
     }
 
@@ -66,9 +70,9 @@ public class BaseHttpTest {
      * @return
      */
     public String post(String uri, MultiValueMap params) {
-        System.out.println("参数：" + JsonUtil.bean2Json(params));
+        LOG.debug("参数：" + JsonUtil.bean2Json(params));
         String result = restTemplate.postForObject(basePath + uri, params, String.class);
-        System.out.println(result);
+        LOG.info(result);
         return result;
     }
 
@@ -99,11 +103,11 @@ public class BaseHttpTest {
         ListenableFuture<ResponseEntity<JSONObject>> future = asyncRestTemplate.getForEntity(url, JSONObject.class);
         future.addCallback(new SuccessCallback<ResponseEntity<JSONObject>>() {
             public void onSuccess(ResponseEntity<JSONObject> result) {
-                System.out.println(result.getBody().toJSONString());
+                LOG.debug(result.getBody().toJSONString());
             }
         }, new FailureCallback() {
             public void onFailure(Throwable ex) {
-                System.out.println("onFailure:" + ex);
+                LOG.error("onFailure:" + ex);
             }
         });
         return "this is async sample";
