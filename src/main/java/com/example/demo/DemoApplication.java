@@ -27,7 +27,7 @@ import java.util.concurrent.Executor;
 @EnableAsync // Async异步方法
 public class DemoApplication extends AsyncConfigurerSupport {
 
-    Logger LOG = LoggerFactory.getLogger(DemoApplication.class);
+    private final static Logger LOG = LoggerFactory.getLogger(DemoApplication.class);
 
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(DemoApplication.class, args);
@@ -42,7 +42,7 @@ public class DemoApplication extends AsyncConfigurerSupport {
             String[] beanNames = ctx.getBeanDefinitionNames();
             Arrays.sort(beanNames);
             for (String beanName : beanNames) {
-                LOG.debug(beanName);
+                System.out.println(beanName);
             }
 
         };

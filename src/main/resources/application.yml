@@ -6,20 +6,30 @@ servlet:
 # profiles配置
 spring:
   profiles:
-    active: dev
+    active: dev #激活-dev结尾资源文件
 
   # 数据库配置
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&autoReconnect=true&failOverReadOnly=false
+    #默认JDBC日志不带参数
+    #driver-class-name: com.mysql.cj.jdbc.Driver
+    #url: jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&autoReconnect=true&failOverReadOnly=false
+
+    #打印日志带参数
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&autoReconnect=true&failOverReadOnly=false
     username: root
     password: pheonix
 
   # Bean生成Table
   jpa:
+    # 使用log4jdbc管理数据库日志，下边内容不需要了
+#    properties:
+#      hibernate:
+#        show_sql: true
+#        format_sql: true #hibernate的JPA日志
     hibernate:
       ddl-auto: update  # 第一次建表create，后面用update
-    show-sql: true
+#    show-sql: true #整体JPA日志
 
   # Mongo配置
   data:
@@ -66,19 +76,25 @@ mybatis:
   mapper-locations: classpath*:mybatis/*Mapper.xml
   type-aliases-package: com.example.demo.entity
 
-# 输出日志
-logging:
-  level:
-    root: warn
-    com: # Mybatis显示sql
-      example:
-        demo: debug
+# 输出日志配在logback.xml
+#logging:
+#  path: SpringBoot/logs
+#  pattern:
+#    file: '%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n'
+#    console: '%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n'
+#
+#  level:
+##    root: warn
+#
+#    com: # Mybatis显示sql
+#      example:
+#        demo: debug
+#
+#      springframework:
+#        security: debug
+#        web: debug
+#        data:
+#          #Mongo显示日志
+#          mongodb:
+#            core: debug
 
-    org:
-      springframework:
-        security: debug
-        web: debug
-        data:
-          #Mongo显示日志
-          mongodb:
-            core: debug

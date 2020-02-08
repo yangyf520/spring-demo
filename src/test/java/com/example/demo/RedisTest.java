@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class RedisTest extends BaseHttpTest {
 
-    public static Logger logger = LoggerFactory.getLogger(RedisTest.class);
+    private final static Logger logger = LoggerFactory.getLogger(RedisTest.class);
 
     @Autowired
     RedisDao redisDao;

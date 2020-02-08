@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--scan="true" scanPeriod="60 seconds" debug="false"-->
+<!--scan为true当配置文件变化重新加载；scanPeriod监测配置文件是否有修改，默认单位是毫秒；debug是否打印logback内部日志-->
+<configuration scan="true">
+
+    <!-- 上下文名称默认default，一旦设置不能修改 -->
+    <!--<contextName>myAppName</contextName>-->
+
+    <!-- 从application.yml 中注入变量 -->
+    <!-- <springProperty scope="context" name="LOG_PATH" source="log.home"/> -->
+    <!-- <springProperty scope="context" name="APPDIR" source="spring.application.name"/> -->
+
+    <!-- 定义变量值，可以使“${}”来引用变量 -->
+    <property name="LOG_PATH" value="./logs"/>
+    <property name="APPDIR" value="graceLogs"/>
+
+    <!-- 获取当前时间戳字符串-->
+    <!--<timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>-->
+
+    <!-- 负责写日志的组件，它有两个必要属性name和class -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!--对日志进行格式化。-->
+        <encoder>
+            <pattern>1-%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger - %msg%n</pattern>
+            <charset>GBK</charset>
+        </encoder>
+    </appender>
+
+    <!-- 输出error级别日志 -->
+    <appender name="FILEERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 当前日志存储目录 -->
+        <file>${LOG_PATH}/${APPDIR}/log_error.log</file>
+
+        <!-- 按日期时间滚动记录输出 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 必要节点，包含文件名及“%d”转换符，归档日志存储位置 -->
+            <fileNamePattern>${LOG_PATH}/${APPDIR}/error/log-error-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+
+
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- 活动文件的大小，默认值是10MB，根据大小切割成多个日志 -->
+                <maxFileSize>1MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+
+            <!-- 保存最近6个月的文件，删除之前的旧文件 -->
+            <maxHistory>2</maxHistory>
+
+            <!-- 日志总保存量为10GB -->
+            <totalSizeCap>10GB</totalSizeCap>
+        </rollingPolicy>
+
+        <!-- 默认是true，日志被追加到文件结尾，如果是false清空现存文件 -->
+        <append>true</append>
+
+        <!-- 默认是false，日志会被安全的写入文件，效率低慎用-->
+        <!--<prudent>true</prudent>-->
+
+        <!--对记录事件进行格式化-->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger Line:%-3L - %msg%n</pattern>
+            <!-- 此处设置字符集 -->
+            <charset>utf-8</charset>
+        </encoder>
+
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!-- 只是error级别以上的日志才显示 -->
+            <level>error</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- warn级别日志文件输出,按日期时间滚动记录输出 -->
+    <appender name="FILEWARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/${APPDIR}/log_warn.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/${APPDIR}/warn/log-warn-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>2MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <append>true</append>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger Line:%-3L - %msg%n</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>warn</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+
+    <!-- info级别日志文件输出,按日期时间滚动记录输出 -->
+    <appender name="FILEINFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/${APPDIR}/log_info.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/${APPDIR}/info/log-info-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>2MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <append>true</append>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger Line:%-3L - %msg%n</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>info</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- 控制台输出的格式设置 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger Line:%-3L - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--设置为OFF,即屏蔽; 留下sqltiming作为INFO级别输出-->
+    <logger name="jdbc.connection" level="OFF"/>
+    <logger name="jdbc.resultset" level="OFF"/>
+    <logger name="jdbc.resultsettable" level="OFF"/>
+    <logger name="jdbc.audit" level="OFF"/>
+    <logger name="jdbc.sqltiming" level="OFF"/>
+    <logger name="jdbc.sqlonly" level="OFF"/>
+
+    <!--设置日志打印级别为INFO-->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILEINFO"/>
+        <appender-ref ref="FILEWARN"/>
+        <appender-ref ref="FILEERROR"/>
+    </root>
+
+</configuration>

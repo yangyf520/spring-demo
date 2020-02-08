@@ -15,7 +15,7 @@ import java.util.Set;
 @Service
 public class ValidFormService {
 
-    Logger LOG = LoggerFactory.getLogger(ValidFormService.class);
+    private final static Logger LOG = LoggerFactory.getLogger(ValidFormService.class);
 
     private static Validator validator;
 

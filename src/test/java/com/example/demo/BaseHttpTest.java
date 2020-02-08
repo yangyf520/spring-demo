@@ -29,7 +29,7 @@ import java.net.URL;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class BaseHttpTest {
 
-    Logger LOG = LoggerFactory.getLogger(BaseHttpTest.class);
+    private final static Logger LOG = LoggerFactory.getLogger(BaseHttpTest.class);
 
     private String basePath;
 

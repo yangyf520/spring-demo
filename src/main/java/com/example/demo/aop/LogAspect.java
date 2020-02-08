@@ -8,11 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-@Component
-@Aspect
+//@Component
+//@Aspect
 public class LogAspect {
 
-    Logger LOG = LoggerFactory.getLogger(LogAspect.class);
+    private final static Logger LOG = LoggerFactory.getLogger(LogAspect.class);
 
     @Pointcut("execution(* com.example.demo.controller..*(..))")
     private void pointCut() {
