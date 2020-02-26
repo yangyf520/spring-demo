@@ -14,6 +14,7 @@ import org.springframework.scheduling.annotation.AsyncConfigurerSupport;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.Arrays;
@@ -34,6 +35,25 @@ public class DemoApplication extends AsyncConfigurerSupport {
         SpringContextUtil.setApplicationContext(context);
     }
 
+    /**
+     * 打印事物实现类
+     *
+     * @param transactionManager
+     * @return
+     */
+    @Bean
+    public Object testBean(PlatformTransactionManager transactionManager) {
+
+        System.out.println(">>>" + transactionManager.getClass().getName());
+        return new Object();
+    }
+
+    /**
+     * 打印实例化Bean
+     *
+     * @param ctx
+     * @return
+     */
     @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
         return args -> {
@@ -51,6 +71,7 @@ public class DemoApplication extends AsyncConfigurerSupport {
     /**
      * 异步方法任务
      * 重写AsyncConfigurerSupport的方法
+     *
      * @return
      */
     @Override

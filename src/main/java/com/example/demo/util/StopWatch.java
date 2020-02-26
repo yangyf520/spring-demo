@@ -9,6 +9,7 @@ import java.util.Deque;
 public class StopWatch {
 
     private static ThreadLocal<StopWatch> threadLocal = new ThreadLocal<StopWatch>() {
+        @Override
         protected synchronized StopWatch initialValue() {
             return new StopWatch();
         }

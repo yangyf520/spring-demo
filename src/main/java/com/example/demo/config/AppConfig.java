@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig {
 
     @Bean
-    public ObjectMapper ObjectMapper(){
+    public ObjectMapper objectMapper(){
         ObjectMapper objectMapper=new ObjectMapper();
         return objectMapper;
     }

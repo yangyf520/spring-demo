@@ -55,8 +55,9 @@ public class HttpRequestUtils {
      * @return
      */
     public static String getClientBrowser(HttpServletRequest request) {
-        if (request == null)
+        if (request == null) {
             return "";
+        }
         return getClientBrowser(request.getHeader("user-agent"));
     }
 
@@ -73,8 +74,9 @@ public class HttpRequestUtils {
     }
 
     public static String getClientOsKernel(HttpServletRequest request) {
-        if (request == null)
+        if (request == null) {
             return "";
+        }
         return getClientOsKernel(request.getHeader("user-agent"));
     }
 

@@ -884,7 +884,7 @@ public final class StringUtils {
                         if (isEnum) {
                             method.invoke(obj,classTmp.getEnumConstants()[1]);
                         } else if ("Long".equals(simpleName) || "long".equals(simpleName)) {
-                            method.invoke(obj,1l);
+                            method.invoke(obj,1L);
                         } else if ("String".equals(simpleName)) {
                             method.invoke(obj,"01");
                         } else if ("BigDecimal".equals(simpleName)) {

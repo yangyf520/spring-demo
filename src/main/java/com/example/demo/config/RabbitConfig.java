@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitConfig {
 
     @Bean
-    public Queue Queue() {
+    public Queue queue() {
         return new Queue("hello");
     }
 
