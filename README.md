@@ -6,7 +6,7 @@
 #### 2、mvn spring-boot:run
 
 #### 3、先到项目根目录
-##### mvn install
+##### mvn install -Dmaven.test.skip=true
 ##### cd target
 ##### java -jar   xxxx.jar
 

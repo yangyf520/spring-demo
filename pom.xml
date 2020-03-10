@@ -17,6 +17,10 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <!--surefire plugin方式跳过maven test, 等同$ mvn package -DskipTests-->
+        <skipTests>true</skipTests>
+        <!--maven方式跳过maven test, 等同$ mvn package -Dmaven.test.skip=true-->
+        <maven.test.skip>true</maven.test.skip>
     </properties>
 
     <dependencies>
