@@ -1,12 +1,17 @@
 package com.example.demo;
 
 import com.example.demo.util.SpringContextUtil;
+import org.apache.catalina.connector.Connector;
+import org.apache.coyote.http11.Http11NioProtocol;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer;
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +22,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.concurrent.Executor;
 
@@ -83,6 +89,32 @@ public class DemoApplication extends AsyncConfigurerSupport {
         executor.setThreadNamePrefix("GithubLookup-");
         executor.initialize();
         return executor;
+    }
+
+    @Bean
+
+    public ConfigurableServletWebServerFactory webServerFactory() {
+        TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory();
+        //端口号
+        factory.setPort(8080);
+        //编码
+        factory.setUriEncoding(Charset.forName("utf-8"));
+        factory.addConnectorCustomizers(new MyTomcatConnectorCustomizer());
+        return factory;
+    }
+
+    class MyTomcatConnectorCustomizer implements TomcatConnectorCustomizer {
+        @Override
+        public void customize(Connector connector) {
+            // TODO Auto-generated method stub
+            Http11NioProtocol handler = (Http11NioProtocol) connector.getProtocolHandler();
+            handler.setAcceptCount(2000);//排队数
+            handler.setMaxConnections(5000);//最大连接数
+            handler.setMaxThreads(2000);//线程池的最大线程数
+            handler.setMinSpareThreads(100);//最小线程数
+            handler.setConnectionTimeout(30000);//超时时间       
+        }
+
     }
 
 }
