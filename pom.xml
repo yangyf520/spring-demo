@@ -80,13 +80,6 @@
             <version>2.1.1</version>
         </dependency>
 
-        <!--hibernate validator-->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>6.0.9.Final</version>
-        </dependency>
-
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -180,6 +173,12 @@
             <groupId>com.belerweb</groupId>
             <artifactId>pinyin4j</artifactId>
             <version>2.5.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.pusuo</groupId>
+            <artifactId>patchca</artifactId>
+            <version>0.5.0</version>
         </dependency>
 
         <!--代理工具-->

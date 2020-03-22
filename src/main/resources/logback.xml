@@ -74,7 +74,7 @@
     <appender name="FILEWARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_PATH}/${APPDIR}/log_warn.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/${APPDIR}/warn/log-warn-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <fileNamePattern>${LOG_PATH}/${APPDIR}/warn/log-warn-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>2MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
@@ -96,7 +96,7 @@
     <appender name="FILEINFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_PATH}/${APPDIR}/log_info.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/${APPDIR}/info/log-info-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>${LOG_PATH}/${APPDIR}/info/log-info-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>2MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>

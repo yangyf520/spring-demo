@@ -11,6 +11,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ApplicationContext;
@@ -30,6 +31,7 @@ import java.util.concurrent.Executor;
 @EnableCaching // 缓存
 @EnableScheduling // Scheduled
 @EnableTransactionManagement // 事物
+@ServletComponentScan // 理发师
 @MapperScan("com.example.*.mapper") // Mapper
 @EnableAsync // Async异步方法
 public class DemoApplication extends AsyncConfigurerSupport {
@@ -48,7 +50,7 @@ public class DemoApplication extends AsyncConfigurerSupport {
      * @return
      */
     @Bean
-    public Object testBean(PlatformTransactionManager transactionManager) {
+    public Object printBean(PlatformTransactionManager transactionManager) {
 
         System.out.println(">>>" + transactionManager.getClass().getName());
         return new Object();
@@ -91,8 +93,11 @@ public class DemoApplication extends AsyncConfigurerSupport {
         return executor;
     }
 
+    /**
+     * Tomcat配置
+     * @return
+     */
     @Bean
-
     public ConfigurableServletWebServerFactory webServerFactory() {
         TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory();
         //端口号
@@ -103,6 +108,9 @@ public class DemoApplication extends AsyncConfigurerSupport {
         return factory;
     }
 
+    /**
+     * Tomcat连接池配置
+     */
     class MyTomcatConnectorCustomizer implements TomcatConnectorCustomizer {
         @Override
         public void customize(Connector connector) {
