@@ -1,10 +1,18 @@
 # tomcat启动配置
-servlet:
-  context-path: /demo
-  port: 8888
+#servlet:
+##  context-path: /demo
+##  port: 8888
 
-# profiles配置
+# Spring配置
 spring:
+
+  application:
+    name: hystrix-dashboard
+
+    # RabbitMQ配置
+    #name: Spring-boot-rabbitmq
+
+  # profiles配置
   profiles:
     active: dev #激活-dev结尾资源文件
 
@@ -23,13 +31,13 @@ spring:
   # Bean生成Table
   jpa:
     # 使用log4jdbc管理数据库日志，下边内容不需要了
-#    properties:
-#      hibernate:
-#        show_sql: true
-#        format_sql: true #hibernate的JPA日志
+    #    properties:
+    #      hibernate:
+    #        show_sql: true
+    #        format_sql: true #hibernate的JPA日志
     hibernate:
       ddl-auto: update  # 第一次建表create，后面用update
-#    show-sql: true #整体JPA日志
+  #    show-sql: true #整体JPA日志
 
   # Mongo配置
   data:
@@ -44,14 +52,14 @@ spring:
     database: 1
     #timeout: 0
     lettuce:
-        shutdown-timeout: 100ms
-        pool:
-          min-idle: 5
-          max-idle: 10
-          max-active: 8
-          max-wait: 1ms
-#    cluster:
-#        nodes: localhost:6379
+      shutdown-timeout: 100ms
+      pool:
+        min-idle: 5
+        max-idle: 10
+        max-active: 8
+        max-wait: 1ms
+  #    cluster:
+  #        nodes: localhost:6379
 
   mail:
     host: smtp.163.com
@@ -61,20 +69,27 @@ spring:
     protocol: smtp
     default-encoding: UTF-8
 
-  # RabbitMQ配置
-  application:
-      name: Spring-boot-rabbitmq
 rabbitmq:
-     host: localhost
-     port: 15672
-     virtual-host: /
-     username: root
-     password: pheonix
+  host: localhost
+  port: 15672
+  virtual-host: /
+  username: root
+  password: pheonix
 
 # Mybatis的xml管理
 mybatis:
   mapper-locations: classpath*:mybatis/*Mapper.xml
   type-aliases-package: com.example.demo.entity
+
+#Hystrix-dashboard
+management:
+  server:
+    servlet:
+      context-path: /
+  endpoints:
+    web:
+      exposure:
+        include: ["health","info","hystrix.stream"]
 
 # 输出日志配在logback.xml
 #logging:

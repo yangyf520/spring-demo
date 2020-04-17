@@ -27,13 +27,13 @@ import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.concurrent.Executor;
 
-@SpringBootApplication
 @EnableCaching // 缓存
 @EnableScheduling // Scheduled
 @EnableTransactionManagement // 事物
 @ServletComponentScan // 理发师
 @MapperScan("com.example.*.mapper") // Mapper
 @EnableAsync // Async异步方法
+@SpringBootApplication
 public class DemoApplication extends AsyncConfigurerSupport {
 
     private final static Logger LOG = LoggerFactory.getLogger(DemoApplication.class);
